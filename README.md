@@ -45,6 +45,30 @@ Without FUSE: `APPIMAGE_EXTRACT_AND_RUN=1 ./Pulsaride-linux-x86_64.AppImage`
 
 Then check your setup: `pulsaride doctor`
 
+## Agents
+
+Pulsaride drives the coding agent you already use. It never stores your keys: each agent signs in with its own command, and runs confined (project files only, network limited to its provider).
+
+**Add an agent:** open the agent panel (right side), pick an agent, then:
+1. **Install** — Pulsaride shows the official install command and can run it in its terminal.
+2. **Sign in** — with the agent's own command (for example `codex login`).
+3. **Enable** — review its permissions (files, network) and approve.
+
+| Agent | How Pulsaride runs it |
+|---|---|
+| Claude Code | built-in connector |
+| Codex | built-in connector |
+| OpenCode | ACP: `opencode acp` |
+| Gemini CLI | ACP: `gemini --acp` |
+| GitHub Copilot CLI (preview) | ACP: `copilot --acp` |
+| Qwen Code | ACP: `qwen --acp` |
+| Cursor CLI | ACP: `agent acp` |
+| Antigravity CLI | not supported yet (no ACP) |
+
+**Another agent?** Any agent that speaks the [Agent Client Protocol](https://agentclientprotocol.com) works: choose **Other ACP agent…**, give it a name and its launch command. Advanced users can import a connector file instead.
+
+**Local models (Ollama):** use them through an agent that supports Ollama (OpenCode, Codex, Claude Code), with Ollama running on `localhost:11434`.
+
 ## Feedback and bugs
 
 Open an [issue](https://github.com/pulsaride/pulsaride/issues) with your distribution, the output of `pulsaride doctor`, and the steps to reproduce.
