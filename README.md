@@ -47,27 +47,24 @@ Then check your setup: `pulsaride doctor`
 
 ## Agents
 
-Pulsaride drives the coding agent you already use. It never stores your keys: each agent signs in with its own command, and runs confined (project files only, network limited to its provider).
+Pulsaride drives the coding agent you already use. Heron does not own or store your provider credentials: each agent signs in with its own method, and runs confined (project files only, network limited to what you approve).
 
-**Add an agent:** open the agent panel (right side), pick an agent, then:
-1. **Install** — Pulsaride shows the official install command and can run it in its terminal.
-2. **Sign in** — with the agent's own command (for example `codex login`).
-3. **Enable** — review its permissions (files, network) and approve.
+Open the **Agent Hub** (right panel) and click **Connect** on an agent. Pulsaride then:
+1. installs it if needed — it shows the official command and runs it in its terminal after you agree;
+2. shows what the agent will be allowed to do (files, network) and asks for your approval;
+3. runs a short confined test (asks the agent to reply "OK", nothing from your project is sent; it may use a little of your quota).
 
-| Agent | How Pulsaride runs it |
-|---|---|
-| Claude Code | built-in connector |
-| Codex | built-in connector |
-| OpenCode | ACP: `opencode acp` |
-| Gemini CLI | ACP: `gemini --acp` |
-| GitHub Copilot CLI (preview) | ACP: `copilot --acp` |
-| Qwen Code | ACP: `qwen --acp` |
-| Cursor CLI | ACP: `agent acp` |
-| Antigravity CLI | not supported yet (no ACP) |
+The agent is **Ready** only if it actually answered. Then pick it in the composer with **Select**.
 
-**Another agent?** Any agent that speaks the [Agent Client Protocol](https://agentclientprotocol.com) works: choose **Other ACP agent…**, give it a name and its launch command. Advanced users can import a connector file instead.
+| Agent | Provider | How Pulsaride runs it |
+|---|---|---|
+| Claude Code | Anthropic | ACP adapter `claude-agent-acp` |
+| Codex | OpenAI | ACP adapter `codex-acp` (ChatGPT sign-in or API key) |
+| OpenCode | Multiple providers | native ACP: `opencode acp` |
 
-**Local models (Ollama):** use them through an agent that supports Ollama (OpenCode, Codex, Claude Code), with Ollama running on `localhost:11434`.
+**Another agent?** Any agent that speaks the [Agent Client Protocol](https://agentclientprotocol.com) works: **+ Add custom ACP agent**, then give its name, executable and arguments (launched directly, never through a shell). It is shown as *Local · Unverified* until you trust it.
+
+**OpenCode and network access:** OpenCode can use several providers, so no domain is allowed in advance. Each provider domain (for example `api.anthropic.com`) is allowed the first time OpenCode needs it, after you approve it.
 
 ## Feedback and bugs
 
